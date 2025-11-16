@@ -4,37 +4,37 @@ import pandas as pd
 
 # Carga el dataset
 archivo_datos = "dataset_notas_22_alumnos.xlsx"
-datos_estudiantes = pd.read_excel(archivo_datos)
+datos_alumnos = pd.read_excel(archivo_datos)
 
 # convertir fechas
-datos_estudiantes["Fecha"] = pd.to_datetime(datos_estudiantes["Fecha"], errors="coerce")
+datos_alumnos["Fecha"] = pd.to_datetime(datos_alumnos["Fecha"], errors="coerce")
 
 # buscar informacion del alumno
 def realizar_busqueda():
-    nombre_estudiante = campo_nombre.get().strip()
+    nombre_alumno = campo_nombre.get().strip()
 
-    if not nombre_estudiante:
+    if not nombre_alumno:
         messagebox.showwarning("Atención", "Por favor, escribe el nombre completo del alumno.")
         return
 
     # Buscar ignorando mayusculas
-    registros_estudiante = datos_estudiantes[
-        datos_estudiantes["Nombre"].str.lower() == nombre_estudiante.lower()
+    registros_alumno = datos_alumnos[
+        datos_alumnos["Nombre"].str.lower() == nombre_alumno.lower()
     ]
 
-    if registros_estudiante.empty:
+    if registros_alumno.empty:
         tabla_notas.delete(*tabla_notas.get_children())
         etiqueta_estado.config(
-            text=f"No se encontró al alumno '{nombre_estudiante}'", 
+            text=f"No se encontró al alumno '{nombre_alumno}'", 
             bg="pink", fg="red"
         )
         
         # Mostrar sugerencias de nombres disponibles
-        todos_los_nombres = datos_estudiantes["Nombre"].unique()
+        todos_los_nombres = datos_alumnos["Nombre"].unique()
         nombres_parecidos = [n for n in todos_los_nombres 
-                            if nombre_estudiante.lower() in n.lower()]
+                            if nombre_alumno.lower() in n.lower()]
         
-        mensaje = f"No se encontró al alumno '{nombre_estudiante}' en el sistema."
+        mensaje = f"No se encontró al alumno '{nombre_alumno}' en el sistema."
         if nombres_parecidos:
             mensaje += f"\n\n¿Quisiste decir alguno de estos?\n" + "\n".join(f"• {n}" for n in nombres_parecidos[:5])
         
@@ -50,8 +50,8 @@ def realizar_busqueda():
     total_puntos = 0
     contador_bajo_60 = 0
 
-    # Procesar cada registro del estudiante
-    for indice, registro in registros_estudiante.iterrows():
+    # Procesar cada registro del alumno
+    for indice, registro in registros_alumno.iterrows():
         fecha_registro = registro["Fecha"]
         materia_curso = registro["Materia"]
         puntos_obtenidos = registro["Puntaje"]
@@ -104,7 +104,7 @@ def realizar_busqueda():
     else:
         etiqueta_promedio.config(text="Promedio General: Sin calificaciones", fg="gray")
 
-    # Mostrar estado general del estudiante
+    # Mostrar estado general del alumno
     if notas_bajas:
         etiqueta_estado.config(
             text=f"Alerta Académica: {contador_bajo_60} calificación(es) por debajo del 60%",
@@ -112,14 +112,14 @@ def realizar_busqueda():
         )
         messagebox.showwarning(
             "Alerta Académica",
-            f"Atención: El estudiante {nombre_estudiante} tiene {contador_bajo_60} "
+            f"Atención: El alumno {nombre_alumno} tiene {contador_bajo_60} "
             f"calificación(es) por debajo del 60%.\n\n"
             f"Promedio general: {promedio_general:.1f}%\n\n"
             f"Se recomienda seguimiento y apoyo académico."
         )
     else:
         etiqueta_estado.config(
-            text="✓ Rendimiento satisfactorio - No hay alertas académicas",
+            text="Rendimiento satisfactorio - No hay alertas académicas",
             bg="lightgreen", fg="darkgreen"
         )
 
@@ -169,7 +169,7 @@ seccion_busqueda.pack(fill="x", pady=(0, 15))
 # Título principal
 titulo_app = tk.Label(
     seccion_busqueda, 
-    text="🎓 Sistema de Alertas Académicas - Q3 2025",
+    text="Sistema de Alertas Académicas - Q3 2025",
     font=("Segoe UI", 16, "bold"),
     bg="white", fg="blue"
 )
@@ -207,7 +207,7 @@ campo_nombre.pack(side="left", padx=5)
 # Botones 
 boton_buscar = tk.Button(
     area_entrada, 
-    text="🔍 Buscar",
+    text="Buscar",
     command=realizar_busqueda,
     font=("Segoe UI", 10, "bold"),
     bg="blue", fg="white",
@@ -266,7 +266,7 @@ seccion_resultados.pack(fill="both", expand=True)
 
 titulo_resultados = tk.Label(
     seccion_resultados,
-    text="Historial de Calificaciones del Estudiante",
+    text="Historial de Calificaciones del Alumno",
     font=("Segoe UI", 12, "bold"),
     bg="white", fg="black"
 )
@@ -318,22 +318,22 @@ tk.Label(
     bg="white", fg="black"
 ).pack(side="left", padx=5)
 
-tk.Label(seccion_leyenda, text="■", font=("Segoe UI", 14),
+tk.Label(seccion_leyenda, text="■ ", font=("Segoe UI", 14),
         bg="white", fg="red").pack(side="left")
 tk.Label(seccion_leyenda, text="Menos de 60%", font=("Segoe UI", 9),
         bg="white", fg="black").pack(side="left", padx=(0, 10))
 
-tk.Label(seccion_leyenda, text="■", font=("Segoe UI", 14),
+tk.Label(seccion_leyenda, text="■ ", font=("Segoe UI", 14),
         bg="white", fg="orange").pack(side="left")
 tk.Label(seccion_leyenda, text="60% - 69%", font=("Segoe UI", 9),
         bg="white", fg="black").pack(side="left", padx=(0, 10))
 
-tk.Label(seccion_leyenda, text="■", font=("Segoe UI", 14),
+tk.Label(seccion_leyenda, text="■ ", font=("Segoe UI", 14),
         bg="white", fg="green").pack(side="left")
 tk.Label(seccion_leyenda, text="70% o más", font=("Segoe UI", 9),
         bg="white", fg="black").pack(side="left", padx=(0, 10))
 
-tk.Label(seccion_leyenda, text="■", font=("Segoe UI", 14),
+tk.Label(seccion_leyenda, text="■ ", font=("Segoe UI", 14),
         bg="white", fg="gray").pack(side="left")
 tk.Label(seccion_leyenda, text="Pendiente", font=("Segoe UI", 9),
         bg="white", fg="black").pack(side="left")
