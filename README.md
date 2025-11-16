@@ -5,7 +5,7 @@ Su objetivo es ayudar a docentes a monitorear rápidamente el rendimiento acadé
 
 ---
 
-## 🎯 Objetivo del Proyecto
+##  Objetivo del Proyecto
 
 Facilitar el trabajo docente permitiendo:
 - Buscar estudiantes por nombre.
@@ -17,7 +17,7 @@ Facilitar el trabajo docente permitiendo:
 
 ---
 
-## 📂 Descripción del Dataset
+##  Descripción del Dataset
 
 El archivo `dataset_notas_22_alumnos.xlsx` contiene:
 - **22 estudiantes** del 6° grado.
@@ -36,7 +36,7 @@ El dataset se utiliza directamente en la aplicación para generar resultados en 
 
 ---
 
-## 🧠 Estructura y Funcionamiento
+## Estructura y Funcionamiento
 
 1. El docente escribe el **nombre completo del alumno**.
 2. La aplicación filtra y muestra:
@@ -45,16 +45,16 @@ El dataset se utiliza directamente en la aplicación para generar resultados en 
    - Tipo  
    - Puntaje  
 3. Los puntajes se colorean según rendimiento:
-   - 🔴 **Menos de 60%**  
-   - 🟡 **Entre 60% y 69%**  
-   - 🟢 **70% o más**  
-   - ⚪ **Pendiente**  
+   - Rojo **Menos de 60%**  
+   - Amarillo **Entre 60% y 69%**  
+   - Verde **70% o más**  
+   - Blanco **Pendiente**  
 4. Se calcula automáticamente el **promedio del estudiante**.
 5. Si el alumno tiene notas debajo del 60% → aparece una **Alerta Académica**.
 
 ---
 
-## ⚠️ Alertas Generadas por la App
+## Alertas Generadas por la App
 
 La aplicación detecta automáticamente:
 - Cantidad de calificaciones < 60%.
@@ -67,7 +67,7 @@ Ejemplo de mensaje emergente:
 
 ---
 
-## 🖥️ Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 - **Python 3**
 - **Tkinter** (Interfaz gráfica)
@@ -77,7 +77,7 @@ Ejemplo de mensaje emergente:
 
 ---
 
-## 🛠️ ¿Cómo ejecutar el proyecto?
+## ¿Cómo ejecutar el proyecto?
 
 1. Clonar el repositorio:
    ```bash
